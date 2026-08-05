@@ -18,13 +18,26 @@
   <%# Favicon（暂用 SVG 内联占位，之后可替换） %>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23222'/><text x='16' y='22' font-size='18' fill='%236db5a4' text-anchor='middle' font-family='serif'>L</text></svg>">
 
-  <%# 字体：优先系统字体保证即时显示，Web 字体作为渐进增强（异步加载） %>
+  <%# 关键首屏样式 inline：让背景色/布局立即渲染，不等外部 CSS（减少白屏） %>
+  <style>
+    html,body{margin:0;background:#1a1814;color:#e8e2d5;}
+    body{font-family:Georgia,"Times New Roman",serif;font-size:16px;line-height:1.75;}
+    .hero{min-height:50vh;display:flex;align-items:center;}
+    .lattice-canvas{position:absolute;inset:0;}
+  </style>
+
+  <%# DNS 预热：让浏览器提前解析字体服务器，减少首次白屏 %>
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+
+  <%# 字体：异步加载（不阻塞渲染），精简字重降低下载量 %>
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=JetBrains+Mono:wght@400&family=Noto+Serif+SC:wght@400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=JetBrains+Mono:wght@400&family=Noto+Serif+SC:wght@400;500&display=swap"></noscript>
 
-  <%# 样式 %>
+  <%# 样式：preload 让浏览器尽早并行下载，减少白屏 %>
+  <%# css() 会输出 <link rel="stylesheet">，本身是渲染阻塞的，配合上面的 inline critical CSS 可保证首屏不白 %>
   <%- css('css/style') %>
 
   <%# Hexo 自带变量，供前端 JS 使用 %>
