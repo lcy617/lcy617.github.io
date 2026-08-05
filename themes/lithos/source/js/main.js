@@ -1,17 +1,38 @@
 /* ============================================================
    Lithos · 主交互脚本
-   轻量、克制，只做必要的事
    ============================================================ */
 
 (function () {
   "use strict";
 
-  // 当前年份已在 footer 用 Hexo 的 date() 渲染，无需 JS 补。
+  // ---------- 移动端汉堡菜单 ----------
+  const toggle = document.getElementById("nav-toggle");
+  const nav = document.getElementById("site-nav");
 
-  // 移动端导航收起：点击链接后，无须特殊处理（无汉堡菜单）。
-  // 如未来加菜单，此处扩展。
+  if (toggle && nav) {
+    toggle.addEventListener("click", function () {
+      const isOpen = nav.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
 
-  // 给外链加 target="_blank" rel="noopener"（正文区域）
+    // 点击导航项后自动收起菜单
+    nav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        nav.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // 屏幕变宽时（横屏等）重置菜单状态
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 860 && nav.classList.contains("open")) {
+        nav.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  // ---------- 外链新窗口打开 ----------
   document.querySelectorAll('.post-content a, .page-content a').forEach(function (a) {
     const href = a.getAttribute('href') || '';
     if (/^https?:\/\//i.test(href) && a.host !== window.location.host) {

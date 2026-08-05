@@ -131,6 +131,47 @@ h1, h2, h3, h4 { font-family: var(--f-serif); font-weight: 500; line-height: 1.2
 .lang-switch .lang-current { color: var(--c-text); }
 .lang-switch:hover { border-color: var(--c-accent); color: var(--c-accent); }
 
+/* 顶栏右侧工具组（语言切换 + 汉堡） */
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 汉堡按钮：默认隐藏，移动端显示 */
+.nav-toggle {
+  display: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+.nav-toggle-bar {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: var(--c-text);
+  transition: transform .25s ease, opacity .2s ease;
+}
+/* 汉堡打开时变 X */
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+  transform: translateY(5.5px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-5.5px) rotate(-45deg);
+}
+
 /* ============================================================
    首页 Hero + 晶格粒子
    ============================================================ */
@@ -431,21 +472,144 @@ h1, h2, h3, h4 { font-family: var(--f-serif); font-weight: 500; line-height: 1.2
 .footer-right a { color: var(--c-text-soft); }
 
 /* ============================================================
-   响应式
+   响应式（移动端适配）
+   ------------------------------------------------------------
+   断点策略：
+   - ≤ 860px：平板，导航开始变挤，折叠成汉堡
+   - ≤ 560px：手机，全面优化间距、字号、触摸目标
    ============================================================ */
-@media (max-width: 768px) {
-  .container { padding: 0 20px; }
-  .site-nav ul { gap: 16px; }
-  .site-nav a { font-size: 13px; }
-  .hero { min-height: 70vh; }
-  .recent-section { padding: 56px 20px 72px; }
+
+/* ---------- 平板及以下：启用汉堡菜单 ---------- */
+@media (max-width: 860px) {
+  .nav-toggle { display: flex; }
+
+  /* 导航折叠为下拉抽屉 */
+  .site-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(26, 24, 20, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--c-border);
+    /* 默认收起 */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease;
+    z-index: 40;
+  }
+  .site-nav.open {
+    max-height: 320px;
+  }
+  .site-nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 20px 20px;
+  }
+  .site-nav li {
+    border-bottom: 1px solid var(--c-border);
+  }
+  .site-nav li:last-child { border-bottom: none; }
+  .site-nav a {
+    display: block;
+    padding: 14px 0;        /* 够大的触摸目标 */
+    font-size: 16px;        /* 移动端正文级字号，易点 */
+    color: var(--c-text);
+  }
+  .site-nav a.active::after { display: none; }
+  .site-nav a.active { color: var(--c-accent); }
+}
+
+/* ---------- 手机：全面优化 ---------- */
+@media (max-width: 560px) {
+  .container { padding: 0 18px; }
+
+  /* 顶栏 */
+  .header-inner { height: 56px; }
+  .brand-mark { width: 26px; height: 26px; font-size: 16px; }
+  .brand-name { font-size: 16px; }
+  .lang-switch { font-size: 11px; padding: 5px 8px; }
+
+  /* Hero：手机上别太高，让首屏能看到 CTA */
+  .hero { min-height: auto; padding: 64px 0 56px; }
+  .hero-eyebrow { font-size: 11px; margin-bottom: 20px; letter-spacing: 0.18em; }
+  .hero-tagline { font-size: 38px; margin-bottom: 16px; }
+  .hero-subtagline { font-size: 14px; margin-bottom: 32px; letter-spacing: 0.02em; }
+  .hero-cta { padding: 10px 18px; font-size: 13px; }
+  .hero-fade { height: 60px; }
+
+  /* 晶格粒子在手机上稍微淡化，避免干扰小屏阅读 */
+  .lattice-canvas { opacity: 0.6; }
+
+  /* 区块 */
+  .recent-section { padding: 48px 18px 64px; }
+  .section-head {
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .section-title { font-size: 24px; }
+  .section-link { font-size: 12px; }
+
+  /* 文章列表：手机上的层次更清晰 */
   .post-item {
     grid-template-columns: 1fr;
-    gap: 4px;
+    gap: 6px;
+    padding: 18px 0;
   }
-  .post-excerpt { grid-column: 1; }
-  .post-content, .page-content { font-size: 16px; }
-  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .post-item:hover { padding-left: 0; }   /* 手机没有 hover，取消位移 */
+  .post-date { font-size: 12px; }
+  .post-title { font-size: 17px; }
+  .post-excerpt { grid-column: 1; font-size: 13px; margin-top: 4px; }
+  .post-cats { margin-top: 2px; }
+
+  /* 文章/页面正文 */
+  .post, .page, .list-page { padding: 48px 0 80px; }
+  .post-header, .page-header { margin-bottom: 36px; }
+  .post-title-large, .page-title { font-size: 28px; }
+  .page-subtitle { font-size: 15px; }
+  .post-content, .page-content {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  .post-content h2, .page-content h2 { font-size: 23px; margin: 40px 0 16px; }
+  .post-content h3, .page-content h3 { font-size: 19px; margin: 32px 0 12px; }
+  .post-content pre, .page-content pre {
+    font-size: 13px;
+    padding: 14px 16px;
+    /* 代码块左移到容器边缘，最大化窄屏可读宽度 */
+    margin-left: -18px;
+    margin-right: -18px;
+    border-radius: 0;
+  }
+
+  /* 文章底部导航 */
+  .post-nav { flex-direction: column; gap: 12px; }
+  .post-nav .next { text-align: left; margin-left: 0; }
+  .post-nav a { max-width: 100%; }
+
+  /* 页脚 */
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .footer-right { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+/* ---------- 超小屏（≤ 360px）：最后兜底 ---------- */
+@media (max-width: 360px) {
+  .hero-tagline { font-size: 32px; }
+  .container { padding: 0 14px; }
+  .brand-name { display: none; }   /* 极窄屏只留 logo，省空间 */
+}
+
+/* ---------- 安全区域适配（刘海屏 / 底部横条） ---------- */
+@supports (padding: max(0px)) {
+  .site-header {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+  .site-footer {
+    padding-bottom: max(32px, env(safe-area-inset-bottom));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
