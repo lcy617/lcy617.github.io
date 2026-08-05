@@ -1,0 +1,27 @@
+# Lithos 主题配置
+
+# 导航菜单（key 对应 i18n 翻译）
+menu:
+  about: /about/
+  notes: /notes/
+  works: /works/
+  research: /research/
+
+# 社交链接（用于页脚和关于页，留空则不显示）
+social:
+  github: https://github.com/lcy617
+  email: # 填你的邮箱，例如 mailto:you@example.com
+
+# 首页 Hero 配置
+hero:
+  # 一句话定位（会被 i18n 覆盖，这里只是 fallback）
+  tagline_zh: 用代码探索地质
+  tagline_en: Exploring geology through code
+
+# 首页晶格粒子可视化
+lattice:
+  enabled: true
+  # 粒子主色（矿物青绿）
+  color: "#6db5a4"
+  # 粒子高亮色（鼠标交互时）
+  hover_color: "#d4a373"

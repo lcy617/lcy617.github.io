@@ -1,0 +1,41 @@
+<%
+  // 归档/列表页：用于「笔记」「作品」板块
+  // page.posts 是分页对象
+%>
+<div class="container list-page">
+  <header class="page-header">
+    <h1 class="page-title"><%= page.title %></h1>
+    <% if (page.subtitle) { %>
+      <p class="page-subtitle"><%= page.subtitle %></p>
+    <% } %>
+  </header>
+
+  <% if (page.posts && page.posts.length) { %>
+    <ul class="post-list post-list-full">
+      <% page.posts.each(function(post){ %>
+        <li class="post-item">
+          <a href="<%- url_for(post.path) %>" class="post-item-link">
+            <span class="post-date"><%= date(post.date, 'YYYY.MM.DD') %></span>
+            <span class="post-title"><%= post.title %></span>
+          </a>
+          <% if (post.excerpt) { %>
+            <p class="post-excerpt"><%- strip_html(post.excerpt).substring(0, 80) %>…</p>
+          <% } %>
+        </li>
+      <% }) %>
+    </ul>
+
+    <% if (page.prev || page.next) { %>
+      <nav class="pagination">
+        <% if (page.prev) { %>
+          <a class="prev" href="<%- url_for(page.prev_link) %>">← <%= __('post.prev') %></a>
+        <% } %>
+        <% if (page.next) { %>
+          <a class="next" href="<%- url_for(page.next_link) %>"><%= __('post.next') %> →</a>
+        <% } %>
+      </nav>
+    <% } %>
+  <% } else { %>
+    <p class="empty-hint"><%= __('index.empty') %></p>
+  <% } %>
+</div>

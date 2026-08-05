@@ -1,0 +1,23 @@
+<%# 英文首页：复用首页结构，文案固定为英文 %>
+<section class="hero">
+  <canvas class="lattice-canvas" aria-hidden="true"></canvas>
+  <div class="hero-content container">
+    <p class="hero-eyebrow">Rock & Code · Field Notes</p>
+    <h1 class="hero-tagline">Exploring geology through code</h1>
+    <p class="hero-subtagline">CS Background · Geological Engineering</p>
+    <a href="<%- url_for('/en/notes/') %>" class="hero-cta">
+      Enter my field notes <span class="arrow">→</span>
+    </a>
+  </div>
+  <div class="hero-fade" aria-hidden="true"></div>
+</section>
+
+<section class="container recent-section">
+  <div class="section-head">
+    <h2 class="section-title">Recent Notes</h2>
+    <a href="<%- url_for('/en/notes/') %>" class="section-link">View all →</a>
+  </div>
+
+  <%# 英文版暂用空状态（英文文章尚未创建） %>
+  <p class="empty-hint">Nothing here yet — stay tuned.</p>
+</section>

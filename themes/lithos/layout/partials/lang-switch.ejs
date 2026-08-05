@@ -1,0 +1,19 @@
+<%
+  // 语言切换：基于 canonical_path（每个页面都声明了它对应的中文站路径）
+  // - canonical_path 是中文站路径，例如 /about/ 或 /notes/
+  // - 切换到中文：直接去 canonical_path
+  // - 切换到英文：去 /en + canonical_path
+  const curLang = page.lang || 'zh';
+  const otherLang = curLang === 'zh' ? 'en' : 'zh';
+  let canon = page.canonical_path || '/';
+  if (!canon.startsWith('/')) canon = '/' + canon;
+  let switchTarget = otherLang === 'zh' ? canon : '/en' + canon;
+  // 统一为干净的目录路径，避免 index.html 后缀
+  switchTarget = switchTarget.replace(/\/index\.html$/, '/');
+  if (!switchTarget.endsWith('/')) switchTarget += '/';
+%>
+<a href="<%- url_for(switchTarget) %>" class="lang-switch" title="<%= otherLang === 'zh' ? '切换到中文' : 'Switch to English' %>">
+  <span class="lang-current"><%= curLang === 'zh' ? '中' : 'EN' %></span>
+  <span class="lang-sep">/</span>
+  <span class="lang-other"><%= otherLang === 'zh' ? '中' : 'EN' %></span>
+</a>

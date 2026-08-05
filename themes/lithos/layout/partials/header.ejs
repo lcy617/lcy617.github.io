@@ -1,0 +1,30 @@
+<%
+  // 当前语言命名空间：英文站所有链接加 /en/ 前缀
+  const lang = page.lang || 'zh';
+  const prefix = lang === 'en' ? '/en' : '';
+%>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="<%- url_for(prefix + '/') %>" class="brand">
+      <span class="brand-mark">L</span>
+      <span class="brand-name"><%= config.title %></span>
+    </a>
+
+    <nav class="site-nav">
+      <ul>
+        <% for (const name in theme.menu) { %>
+          <% const target = theme.menu[name]; %>
+          <% const path = prefix + target; %>
+          <% const active = page.canonical_path && page.canonical_path.replace(/^\//, '').startsWith(target.replace(/^\//, '').replace(/\/$/, '')); %>
+          <li>
+            <a href="<%- url_for(path) %>" class="<%= active ? 'active' : '' %>">
+              <%= __(['nav', name].join('.')) %>
+            </a>
+          </li>
+        <% } %>
+      </ul>
+    </nav>
+
+    <%- partial('partials/lang-switch') %>
+  </div>
+</header>

@@ -1,0 +1,41 @@
+<section class="hero">
+  <canvas class="lattice-canvas" aria-hidden="true"></canvas>
+  <div class="hero-content container">
+    <p class="hero-eyebrow"><%= __('site.subtitle') %></p>
+    <h1 class="hero-tagline"><%= __('hero.tagline') %></h1>
+    <p class="hero-subtagline"><%= __('hero.subtagline') %></p>
+    <a href="<%- url_for('/notes/') %>" class="hero-cta">
+      <%= __('hero.cta') %> <span class="arrow">→</span>
+    </a>
+  </div>
+  <div class="hero-fade" aria-hidden="true"></div>
+</section>
+
+<section class="container recent-section">
+  <div class="section-head">
+    <h2 class="section-title"><%= __('index.recent_notes') %></h2>
+    <a href="<%- url_for('/notes/') %>" class="section-link"><%= __('index.view_all') %> →</a>
+  </div>
+
+  <% if (page.posts && page.posts.length) { %>
+    <ul class="post-list">
+      <% page.posts.each(function(post){ %>
+        <li class="post-item">
+          <a href="<%- url_for(post.path) %>" class="post-item-link">
+            <span class="post-date"><%= date(post.date, 'YYYY.MM.DD') %></span>
+            <span class="post-title"><%= post.title %></span>
+          </a>
+          <% if (post.categories && post.categories.length) { %>
+            <span class="post-cats">
+              <% post.categories.each(function(cat){ %>
+                <span class="cat"><%= cat.name %></span>
+              <% }) %>
+            </span>
+          <% } %>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p class="empty-hint"><%= __('index.empty') %></p>
+  <% } %>
+</section>

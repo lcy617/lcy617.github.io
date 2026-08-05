@@ -1,0 +1,37 @@
+# 中文文案
+nav:
+  home: 首页
+  about: 关于
+  notes: 笔记
+  works: 作品
+  research: 研究展望
+
+site:
+  subtitle: 岩与码 · 研究笔记
+  description: 梁承艺的个人学术博客
+
+hero:
+  tagline: 用代码探索地质
+  subtagline: 计算机本科 · 地质工程研究生
+  cta: 走进我的笔记
+
+footer:
+  built_with: 由 Hexo 驱动 · 自建主题 Lithos
+  copyright: 梁承艺
+
+index:
+  recent_notes: 近期笔记
+  view_all: 查看全部
+  empty: 还没有内容，敬请期待。
+
+post:
+  updated: 更新于
+  prev: 上一篇
+  next: 下一篇
+  back: 返回
+
+page:
+  last_updated: 最后更新
+
+tags:
+  title: 标签

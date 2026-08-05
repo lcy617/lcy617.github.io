@@ -1,0 +1,17 @@
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-left">
+      <span class="footer-mark">Lithos</span>
+      <span class="footer-tagline"><%= __('site.subtitle') %></span>
+    </div>
+    <div class="footer-right">
+      <% if (theme.social && theme.social.github) { %>
+        <a href="<%= theme.social.github %>" target="_blank" rel="noopener">GitHub</a>
+      <% } %>
+      <% if (theme.social && theme.social.email) { %>
+        <a href="<%= theme.social.email %>">Email</a>
+      <% } %>
+      <span class="footer-meta">© <%= date(new Date(), 'YYYY') %> <%= __('footer.copyright') %> · <%= __('footer.built_with') %></span>
+    </div>
+  </div>
+</footer>

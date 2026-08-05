@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="<%= page.lang || 'zh' %>">
+<%- partial('partials/head') %>
+<%
+  // 用 Hexo helper 判断页面类型，生成 body class
+  // is_home() 在首页（index.ejs 渲染时）为 true
+  let bodyClass = 'layout-page';
+  let isHome = false;
+  if (typeof is_home === 'function' && is_home()) {
+    bodyClass = 'layout-index';
+    isHome = true;
+  } else if (page.layout === 'index' || page.layout === 'index-en') {
+    bodyClass = 'layout-index';
+    isHome = true;
+  } else if (page.layout === 'post') {
+    bodyClass = 'layout-post';
+  } else if (page.layout === 'archive') {
+    bodyClass = 'layout-archive';
+  }
+%>
+<body class="<%= bodyClass %>">
+  <%- partial('partials/header') %>
+  <main class="site-main">
+    <%- body %>
+  </main>
+  <%- partial('partials/footer') %>
+  <%- js('js/main') %>
+  <% if (theme.lattice && theme.lattice.enabled && isHome) { %>
+    <%- js('js/lattice') %>
+  <% } %>
+</body>
+</html>

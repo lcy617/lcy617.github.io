@@ -1,0 +1,37 @@
+# English copy
+nav:
+  home: Home
+  about: About
+  notes: Notes
+  works: Works
+  research: Research
+
+site:
+  subtitle: Rock & Code · Field Notes
+  description: Personal academic blog by Liang Chengyi
+
+hero:
+  tagline: Exploring geology through code
+  subtagline: CS Background · Geological Engineering
+  cta: Enter my field notes
+
+footer:
+  built_with: Powered by Hexo · Theme Lithos
+  copyright: Liang Chengyi
+
+index:
+  recent_notes: Recent Notes
+  view_all: View all
+  empty: Nothing here yet — stay tuned.
+
+post:
+  updated: Updated
+  prev: Previous
+  next: Next
+  back: Back
+
+page:
+  last_updated: Last updated
+
+tags:
+  title: Tags

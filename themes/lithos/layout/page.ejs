@@ -1,0 +1,41 @@
+<div class="page container">
+  <header class="page-header">
+    <h1 class="page-title"><%= page.title %></h1>
+    <% if (page.subtitle) { %>
+      <p class="page-subtitle"><%= page.subtitle %></p>
+    <% } %>
+  </header>
+
+  <div class="page-content">
+    <%- page.content %>
+  </div>
+
+  <%# 如果页面声明了 section，渲染该分类的文章列表 %>
+  <% if (page.section) {
+       const posts = site.posts.filter(p => p.categories && p.categories.length && p.categories.some(c => c.name === page.section)).sort((a,b) => b.date - a.date);
+  %>
+    <% if (posts.length) { %>
+      <ul class="post-list post-list-full" style="margin-top: 56px;">
+        <% posts.forEach(function(post){ %>
+          <li class="post-item">
+            <a href="<%- url_for(post.path) %>" class="post-item-link">
+              <span class="post-date"><%= date(post.date, 'YYYY.MM.DD') %></span>
+              <span class="post-title"><%= post.title %></span>
+            </a>
+            <% if (post.excerpt) { %>
+              <p class="post-excerpt"><%- strip_html(post.excerpt).substring(0, 90) %>…</p>
+            <% } %>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p class="empty-hint" style="margin-top: 56px;">这里还空空如也，内容会陆续到来。</p>
+    <% } %>
+  <% } %>
+
+  <% if (page.updated) { %>
+    <footer class="page-footer">
+      <span><%= __('page.last_updated') %>: <%= date(page.updated, 'YYYY-MM-DD') %></span>
+    </footer>
+  <% } %>
+</div>

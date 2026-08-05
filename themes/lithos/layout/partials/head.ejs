@@ -1,0 +1,37 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <%
+    // 确定 canonical URL（去掉 /index.html 和语言前缀的冗余）
+    const canonical = (config.url + page.canonical_path).replace(/\/+$/, '') || config.url;
+  %>
+  <title><%- (page.title ? page.title + ' · ' : '') + config.title %></title>
+  <meta name="description" content="<%= page.description || config.description %>">
+  <meta name="author" content="<%= config.author %>">
+  <link rel="canonical" href="<%= canonical %>">
+
+  <%# RSS %>
+  <%- feed_tag(config.url + '/atom.xml', { type: 'atom', title: config.title }) %>
+
+  <%# Favicon（暂用 SVG 内联占位，之后可替换） %>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23222'/><text x='16' y='22' font-size='18' fill='%236db5a4' text-anchor='middle' font-family='serif'>L</text></svg>">
+
+  <%# 字体：优先系统字体保证即时显示，Web 字体作为渐进增强（异步加载） %>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&display=swap"></noscript>
+
+  <%# 样式 %>
+  <%- css('css/style') %>
+
+  <%# Hexo 自带变量，供前端 JS 使用 %>
+  <script>
+    window.__LITHOS__ = {
+      root: '<%= config.root %>',
+      lang: '<%= page.lang || "zh" %>'
+    };
+  </script>
+</head>
