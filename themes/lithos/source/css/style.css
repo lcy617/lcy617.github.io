@@ -954,3 +954,37 @@ h1, h2, h3, h4 { font-family: var(--f-serif); font-weight: 500; line-height: 1.2
   .highlight-item { padding: 14px; flex-direction: row; justify-content: space-between; align-items: center; }
   .highlight-num { font-size: 18px; }
 }
+
+/* 手机（≤560px）：新组件精修 */
+@media (max-width: 560px) {
+  /* 技能：单列、字号收紧 */
+  .skill-group-title { font-size: 11px; margin-bottom: 8px; }
+  .skill-desc { font-size: 13px; line-height: 1.6; margin-bottom: 10px; }
+  .skill-tags .cat { font-size: 12px; padding: 3px 10px; }
+  .skills-wrap { gap: 20px; }
+
+  /* 项目卡：padding 再收，标题字号降 */
+  .project-card { padding: 20px 16px; }
+  .project-title { font-size: 19px; }
+  .project-meta { font-size: 11px; }
+  .project-intro { font-size: 14px; line-height: 1.65; margin-bottom: 18px; }
+  .project-sub { font-size: 11px; margin: 18px 0 10px; }
+  .project-list { font-size: 14px; line-height: 1.7; padding-left: 16px; }
+  .project-list li { margin-bottom: 5px; }
+  .project-note { font-size: 13px; }
+  .project-link { font-size: 12px; padding: 7px 13px; }
+
+  /* 时间线：左边距和字号适配窄屏 */
+  .timeline { padding-left: 22px; }
+  .timeline-dot { left: -22px; width: 12px; height: 12px; border-width: 2px; top: 4px; }
+  .timeline::before { left: 5px; }
+  .timeline-item { padding-bottom: 28px; }
+  .timeline-period { font-size: 11px; }
+  .timeline-title { font-size: 16px; line-height: 1.4; margin-bottom: 8px; }
+  .timeline-list { font-size: 14px; line-height: 1.7; padding-left: 16px; }
+  .timeline-list li { margin-bottom: 5px; }
+  .timeline-desc { font-size: 14px; line-height: 1.65; }
+
+  /* 页脚：邮箱地址窄屏不溢出 */
+  .footer-right a { font-size: 12px; word-break: break-all; }
+}
