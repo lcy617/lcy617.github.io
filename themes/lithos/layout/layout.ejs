@@ -25,8 +25,8 @@
   </main>
   <%- partial('partials/footer') %>
   <%- js('js/main') %>
-  <% if (theme.lattice && theme.lattice.enabled && isHome) { %>
-    <%- js('js/lattice') %>
+  <% if (theme.crystal && theme.crystal.enabled !== false && isHome) { %>
+    <script type="module" src="<%- url_for('js/crystal.js') %>?v=20260809f"></script>
   <% } %>
 </body>
 </html>

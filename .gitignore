@@ -11,3 +11,12 @@ _multiconfig.yml
 _preview-*.png
 .vscode/
 .idea/
+
+# 工作目录 / 临时素材
+.zcode/
+temp/
+docs/
+
+# 备份与调试文件
+themes/lithos/source/js/crystal.backup.js
+themes/lithos/source/test-particles.html

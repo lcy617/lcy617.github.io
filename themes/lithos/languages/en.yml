@@ -2,8 +2,9 @@
 nav:
   home: Home
   about: About
-  notes: Notes
-  works: Works
+  skills: If It's Useful
+  project: Project
+  timeline: Experience
   research: Research
 
 site:
@@ -11,16 +12,16 @@ site:
   description: Personal academic blog by Liang Chengyi
 
 hero:
-  tagline: Exploring geology through code
-  subtagline: CS Background · Geological Engineering
-  cta: Enter my field notes
+  tagline: Geological Engineering · Incoming Master's
+  subtagline: CS background ｜ Heilongjiang University of Science & Technology
+  cta: A bit about me
 
 footer:
   built_with: Powered by Hexo · Theme Lithos
   copyright: Liang Chengyi
+  resume: Resume PDF
 
 index:
-  recent_notes: Recent Notes
   view_all: View all
   empty: Nothing here yet — stay tuned.
 

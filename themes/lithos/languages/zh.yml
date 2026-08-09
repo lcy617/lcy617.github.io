@@ -2,25 +2,26 @@
 nav:
   home: 首页
   about: 关于
-  notes: 笔记
-  works: 作品
+  skills: 用得上的话
+  project: 项目
+  timeline: 经历
   research: 研究展望
 
 site:
   subtitle: 岩与码 · 研究笔记
-  description: 梁承艺的个人学术博客
+  description: 梁承艺的个人学术博客 — 地质工程 · 计算机背景
 
 hero:
-  tagline: 用代码探索地质
-  subtagline: 计算机本科 · 地质工程研究生
-  cta: 走进我的笔记
+  tagline: 地质工程 · 研0
+  subtagline: 计算机背景 ｜ 黑龙江科技大学
+  cta: 了解一下我
 
 footer:
   built_with: 由 Hexo 驱动 · 自建主题 Lithos
   copyright: 梁承艺
+  resume: 简历 PDF
 
 index:
-  recent_notes: 近期笔记
   view_all: 查看全部
   empty: 还没有内容，敬请期待。
 

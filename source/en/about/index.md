@@ -8,32 +8,20 @@ canonical_path: /about/
 
 ## Hi, I'm Liang Chengyi
 
-I recently completed my undergraduate studies in **Computer Science and Software Engineering**. Driven by a strong interest in cross-disciplinary work, I will pursue a master's degree in **Geological Engineering** at Heilongjiang University of Science and Technology.
+From Liangping, Chongqing. I'm about to begin my Master's in **Geological Engineering** at Heilongjiang University of Science and Technology.
 
-This is my personal blog, **Lithos** — from the Greek word for *rock*. Here I document how I bring my coding skills into geological research.
+My undergraduate background is in computer science, and I later did a Java-backend internship in industry. This blog, **Lithos** — from the Greek for *rock* — documents how I bring my existing engineering ability into geological research.
 
-### From Computer Science to Geological Engineering
+## About this transition
 
-It's a question I'm often asked. My answer: **geological engineering has become more dependent on computing than ever before.**
+Switching to geology wasn't a spur-of-the-moment choice. I gradually came to see that the parts of geological research I'm genuinely drawn to — handling data, building models, turning scattered observations into usable conclusions — are exactly the things I already have the ability to do. I want a direction where both sides can play out.
 
-From seismic signal processing and 3D modeling of rock masses, to prediction algorithms for geohazards and the visual analysis of geological big data — nearly every modern breakthrough in geology is powered by code. And I happen to have hands-on experience in software development.
+I know my geology foundation needs work, and I'm clear about how much that weighs. The good news is I pick up new fields quickly.
 
-I believe someone who **understands geology AND can write code** can do things that neither pure geologists nor pure programmers can. That's what I want to prove during my graduate studies.
+## How to reach me
 
-### What I Can Do
-
-- **Programming**: proficient in mainstream backend/frontend development; capable of shipping a complete project independently
-- **Data processing**: scripting for data cleaning, analysis, and visualization
-- **Engineering rigor**: version control, automated testing, continuous deployment
-- **Willingness to learn**: approaching geology with a beginner's humility and an engineer's discipline
-
-### Contact
-
-If you're a faculty member looking for a graduate student, I'd love to talk:
-
+- **Email**: 1692664808@qq.com
 - **GitHub**: [@lcy617](https://github.com/lcy617)
-- **Email**: *(to be added)*
+- **Gitee**: [lcy-spider-man](https://gitee.com/lcy-spider-man)
 
----
-
-*Every piece of this blog — the content, the theme, the visual design — was built by me from scratch. If you're curious about my technical level, this website itself is a portfolio piece.*
+The fuller picture (skills, project, experience) is on the [home page](/en/), so I won't repeat it here.

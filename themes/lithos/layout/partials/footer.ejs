@@ -8,8 +8,14 @@
       <% if (theme.social && theme.social.github) { %>
         <a href="<%= theme.social.github %>" target="_blank" rel="noopener">GitHub</a>
       <% } %>
+      <% if (theme.social && theme.social.gitee) { %>
+        <a href="<%= theme.social.gitee %>" target="_blank" rel="noopener">Gitee</a>
+      <% } %>
       <% if (theme.social && theme.social.email) { %>
-        <a href="<%= theme.social.email %>">Email</a>
+        <a href="<%= theme.social.email %>"><%= theme.social.email.replace('mailto:', '') %></a>
+      <% } %>
+      <% if (theme.social && theme.social.resume) { %>
+        <a href="<%- url_for(theme.social.resume) %>" target="_blank" rel="noopener"><%= __('footer.resume') %> ↓</a>
       <% } %>
       <span class="footer-meta">© <%= date(new Date(), 'YYYY') %> <%= __('footer.copyright') %> · <%= __('footer.built_with') %></span>
     </div>

@@ -1,41 +1,187 @@
-<section class="hero">
-  <canvas class="lattice-canvas" aria-hidden="true"></canvas>
+<%
+  const _lang = page.lang || 'zh';
+  function findPage(permalink) {
+    let match = null;
+    site.pages.forEach(p => {
+      const pp = p.canonical_path || p.permalink;
+      if (pp !== permalink) return;
+      if (p.lang === _lang && p.content) { match = p; }
+      else if (!match && p.content) { match = p; }
+    });
+    return match;
+  }
+  const aboutPage = findPage('/about/');
+  const researchPage = findPage('/research/');
+%>
+
+<%# 全屏粒子背景画布（fixed，所有章节共享） %>
+<canvas class="lattice-canvas" aria-hidden="true"></canvas>
+
+<%# —— 第 1 节：Hero —— %>
+<section class="hero" id="home" data-section="0" data-morph="0">
   <div class="hero-content container">
     <p class="hero-eyebrow"><%= __('site.subtitle') %></p>
     <h1 class="hero-tagline"><%= __('hero.tagline') %></h1>
     <p class="hero-subtagline"><%= __('hero.subtagline') %></p>
-    <a href="<%- url_for('/notes/') %>" class="hero-cta">
-      <%= __('hero.cta') %> <span class="arrow">→</span>
+    <a href="#about" class="hero-cta" data-smooth>
+      <%= __('hero.cta') %> <span class="arrow">↓</span>
     </a>
   </div>
-  <div class="hero-fade" aria-hidden="true"></div>
 </section>
 
-<section class="container recent-section">
-  <div class="section-head">
-    <h2 class="section-title"><%= __('index.recent_notes') %></h2>
-    <a href="<%- url_for('/notes/') %>" class="section-link"><%= __('index.view_all') %> →</a>
+<%# —— 第 2 节：关于 —— %>
+<section class="story-section" id="about" data-section="1" data-morph="1">
+  <div class="story-panel">
+    <div class="section-head">
+      <h2 class="section-title"><%= __('nav.about') %></h2>
+    </div>
+    <div class="story-content">
+      <p>你好，我是 <strong>梁承艺</strong>，重庆梁平人。我即将进入 <strong>黑龙江科技大学</strong> 攻读 <strong>地质工程</strong> 硕士学位。</p>
+      <p>我本科是计算机方向，毕业后在企业写了一段时间代码——做过一个完整的 Java 后端系统，也维护过 CRM 这类业务系统。说实话，走进地质不是我一开始就规划好的事。但我接触下来，觉得这个方向对自己是说得通的：地质工程的研究越来越离不开计算和数据，而很多地质背景的组里，可能恰好需要这么一个人——能帮着处理数据、搭点工具、把代码写得像样。如果导师那边恰好有这类需求，我想我能搭把手。</p>
+      <h3>关于地质基础</h3>
+      <p>这是我清楚要补的短板，我不会躲。我的打算是从基础课开始系统补，遇到不懂就问、就查。好在我学新东西不算慢，也坐得住。</p>
+      <h3>我能搭把手的地方</h3>
+      <ul>
+        <li>如果组里有跟数据、代码、工具相关的活，我可以上手——不用完全从零教起。心理测评系统那么大的项目，我是从需求一路做到上线的。</li>
+        <li>遇到没做过的事，我会先自己想办法、查资料、动手试，而不是干等着。这个博客从主题到部署，就是这么自己摸出来的。</li>
+        <li>琐碎或者要反复改的活，我也能耐住性子——实习那两个月天天对着业务系统修修补补，就是这么过来的。</li>
+      </ul>
+    </div>
   </div>
+</section>
 
-  <% if (page.posts && page.posts.length) { %>
-    <ul class="post-list">
-      <% page.posts.each(function(post){ %>
-        <li class="post-item">
-          <a href="<%- url_for(post.path) %>" class="post-item-link">
-            <span class="post-date"><%= date(post.date, 'YYYY.MM.DD') %></span>
-            <span class="post-title"><%= post.title %></span>
-          </a>
-          <% if (post.categories && post.categories.length) { %>
-            <span class="post-cats">
-              <% post.categories.each(function(cat){ %>
-                <span class="cat"><%= cat.name %></span>
-              <% }) %>
-            </span>
-          <% } %>
-        </li>
-      <% }) %>
-    </ul>
-  <% } else { %>
-    <p class="empty-hint"><%= __('index.empty') %></p>
-  <% } %>
+<%# —— 第 3 节：我能帮上什么 —— %>
+<section class="story-section" id="skills" data-section="2" data-morph="1">
+  <div class="story-panel">
+    <div class="section-head">
+      <h2 class="section-title"><%= __('nav.skills') %></h2>
+    </div>
+    <div class="story-content" style="margin-bottom:28px">
+      <p>我比较扎实的是 Java 后端——独立做过一个完整的、上线运行的全站系统。前端能配合联调，工程化的习惯（版本控制、文档、可维护性）是实习里实打实练出来的。</p>
+    </div>
+    <div class="skills-wrap">
+      <div class="skill-group">
+        <h3 class="skill-group-title">后端开发（我的主方向）</h3>
+        <p class="skill-desc">能独立搭建一个完整的后端服务：接口设计、数据库设计、业务逻辑实现、权限控制。心理测评系统就是我从需求到上线一路做下来的。</p>
+        <div class="skill-tags">
+          <span class="cat">Java</span>
+          <span class="cat">Spring Boot</span>
+          <span class="cat">MyBatis</span>
+          <span class="cat">MySQL</span>
+          <span class="cat">Spring Security</span>
+          <span class="cat">Redis</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3 class="skill-group-title">前端协作</h3>
+        <p class="skill-desc">能看懂前端代码、配合联调接口，前后端对接不会卡在我这边。独立从零搭前端项目不是我的强项，但改和调没问题。</p>
+        <div class="skill-tags">
+          <span class="cat">Vue3</span>
+          <span class="cat">前后端联调</span>
+          <span class="cat">RESTful API</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3 class="skill-group-title">工程化习惯</h3>
+        <p class="skill-desc">用 Git 管代码、写文档、把流程整理清楚——这些是实习里每天都做的事，带到课题组里同样受用。</p>
+        <div class="skill-tags">
+          <span class="cat">Git</span>
+          <span class="cat">文档习惯</span>
+          <span class="cat">可维护性</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3 class="skill-group-title">快速上手新东西</h3>
+        <p class="skill-desc">遇到没接触过的工具或领域，我能比较快地跑通一个能用的版本，再边做边深入。这个博客从前端到部署，我就是这么摸出来的。</p>
+        <div class="skill-tags">
+          <span class="cat">快速学习</span>
+          <span class="cat">边做边学</span>
+          <span class="cat">查文档</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# —— 第 4 节：做过的事（心理测评系统） —— %>
+<section class="story-section" id="project" data-section="3" data-morph="2">
+  <div class="story-panel">
+    <div class="section-head">
+      <h2 class="section-title"><%= __('nav.project') %></h2>
+    </div>
+    <article class="project-card">
+      <div class="project-head">
+        <div>
+          <h3 class="project-title">校园心理测评系统</h3>
+          <p class="project-meta">2025.06 – 2026.03 ｜ 实习期间参与 ｜ Java 后端</p>
+        </div>
+        <a class="project-link" href="https://gitee.com/lcy-spider-man/psy_cjxy.git" target="_blank" rel="noopener">
+          Gitee 源码 →
+        </a>
+      </div>
+      <p class="project-intro">这是一个给学校用的心理测评系统，学生在上面做题、出结果，辅导员和心理中心能看到数据。我负责其中的后端开发。</p>
+
+      <h4 class="project-sub">我实际做了什么</h4>
+      <ul class="project-list">
+        <li>从理解需求开始，把"问卷怎么发、答案怎么存、结果怎么算"这件事拆成一个个能写的小模块，再一个一个实现、联调、改；</li>
+        <li>遇到一个比较绕的部分——把不同量表的计分规则统一起来，我花了些时间梳理逻辑、和同事对齐，最后做成了一个能扩展的规则，之后加新量表不用从头来；</li>
+        <li>系统数据积累到一定量后查询变慢，我查了原因、加了索引，把响应从几秒拉回到正常水平。</li>
+      </ul>
+
+      <h4 class="project-sub">这段经历让我学到的</h4>
+      <ul class="project-list">
+        <li>在一个真实的、有人持续使用的系统里，怎么接需求、怎么协作、出了问题怎么定位；</li>
+        <li>代码写完不是结束——得能让人看懂、能维护、能在之后接着改，这点对我以后做研究同样重要。</li>
+      </ul>
+
+      <p class="project-note">技术栈：Spring Boot、MyBatis、MySQL、Redis、Vue3。完整源码在 Gitee，欢迎查看。</p>
+    </article>
+  </div>
+</section>
+
+<%# —— 第 5 节：经历（时间线） —— %>
+<section class="story-section" id="timeline" data-section="4" data-morph="2">
+  <div class="story-panel">
+    <div class="section-head">
+      <h2 class="section-title"><%= __('nav.timeline') %></h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <div class="timeline-period">2026.09 起</div>
+          <h3 class="timeline-title">黑龙江科技大学 ｜ 地质工程（硕士）</h3>
+          <p class="timeline-desc">即将入学，研究方向跟导师商量着定。如果方向里能用到一点计算或数据处理，是我比较顺手的；不过以导师的课题为准，我愿意去适应。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <div class="timeline-period">2026 年</div>
+          <h3 class="timeline-title">遵义 · 中联精工 ｜ Web 开发</h3>
+          <p class="timeline-desc">维护企业内部的业务系统（CRM、内部管理系统），日常做 Web 端的开发和修补。时间不长，但让我对企业级系统的真实维护有了手感。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <div class="timeline-period">2025.06 – 2026.03</div>
+          <h3 class="timeline-title">重庆游者行 ｜ Java 后端（实习）</h3>
+          <p class="timeline-desc">这是我最主要的一段经历——独立负责心理测评系统的后端，从需求到上线。具体做了什么，见上面的项目介绍。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# —— 第 6 节：研究展望 —— %>
+<section class="story-section" id="research" data-section="5" data-morph="3">
+  <div class="story-panel">
+    <div class="section-head">
+      <h2 class="section-title"><%= __('nav.research') %></h2>
+    </div>
+    <% if (researchPage) { %>
+      <div class="story-content"><%- researchPage.content %></div>
+    <% } %>
+  </div>
 </section>

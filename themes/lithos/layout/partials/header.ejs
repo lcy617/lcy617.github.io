@@ -2,6 +2,9 @@
   // 当前语言命名空间：英文站所有链接加 /en/ 前缀
   const lang = page.lang || 'zh';
   const prefix = lang === 'en' ? '/en' : '';
+  // 是否在首页（单页）：index / index-en 布局
+  const _isHome = page.layout === 'index' || page.layout === 'index-en' ||
+    (typeof is_home === 'function' && is_home());
 %>
 <header class="site-header">
   <div class="container header-inner">
@@ -14,10 +17,17 @@
       <ul>
         <% for (const name in theme.menu) { %>
           <% const target = theme.menu[name]; %>
-          <% const path = prefix + target; %>
-          <% const active = page.canonical_path && page.canonical_path.replace(/^\//, '').startsWith(target.replace(/^\//, '').replace(/\/$/, '')); %>
+          <%
+            // 锚点导航：首页直接用 #anchor（平滑滚动）；非首页回首页再定位
+            let href;
+            if (target.startsWith('#')) {
+              href = _isHome ? (prefix + '/') + target : (prefix + '/') + target;
+            } else {
+              href = prefix + target;
+            }
+          %>
           <li>
-            <a href="<%- url_for(path) %>" class="<%= active ? 'active' : '' %>">
+            <a href="<%- url_for(href) %>"<%= target.startsWith('#') ? ' data-smooth' : '' %>>
               <%= __(['nav', name].join('.')) %>
             </a>
           </li>

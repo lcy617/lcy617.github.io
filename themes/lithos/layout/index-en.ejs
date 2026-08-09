@@ -1,23 +1,168 @@
-<%# 英文首页：复用首页结构，文案固定为英文 %>
-<section class="hero">
-  <canvas class="lattice-canvas" aria-hidden="true"></canvas>
+<%
+  const _lang = page.lang || 'en';
+  function findPage(permalink) {
+    let match = null;
+    site.pages.forEach(p => {
+      const pp = p.canonical_path || p.permalink;
+      if (pp !== permalink) return;
+      if (p.lang === _lang && p.content) { match = p; }
+      else if (!match && p.content) { match = p; }
+    });
+    return match;
+  }
+  const aboutPage = findPage('/about/');
+  const researchPage = findPage('/research/');
+%>
+
+<canvas class="lattice-canvas" aria-hidden="true"></canvas>
+
+<section class="hero" id="home" data-section="0" data-morph="0">
   <div class="hero-content container">
     <p class="hero-eyebrow">Rock & Code · Field Notes</p>
     <h1 class="hero-tagline">Exploring geology through code</h1>
-    <p class="hero-subtagline">CS Background · Geological Engineering</p>
-    <a href="<%- url_for('/en/notes/') %>" class="hero-cta">
-      Enter my field notes <span class="arrow">→</span>
+    <p class="hero-subtagline">Incoming Master's · Geological Engineering · Heilongjiang University of Science &amp; Technology</p>
+    <a href="#about" class="hero-cta" data-smooth>
+      Get to know me <span class="arrow">↓</span>
     </a>
   </div>
-  <div class="hero-fade" aria-hidden="true"></div>
 </section>
 
-<section class="container recent-section">
-  <div class="section-head">
-    <h2 class="section-title">Recent Notes</h2>
-    <a href="<%- url_for('/en/notes/') %>" class="section-link">View all →</a>
+<section class="story-section" id="about" data-section="1" data-morph="1">
+  <div class="story-panel">
+    <div class="section-head"><h2 class="section-title">About</h2></div>
+    <div class="story-content">
+      <p>Hi, I'm <strong>Liang Chengyi</strong>, from Liangping, Chongqing. I'm about to begin my Master's in <strong>Geological Engineering</strong> at <strong>Heilongjiang University of Science &amp; Technology</strong>.</p>
+      <p>My undergraduate background is in computer science. After graduating I spent some time writing code in industry — I built a complete Java backend system and maintained business systems like a CRM. Honestly, coming into geology wasn't something I'd planned from the start. But the more I looked at it, the more it made sense for me — geological engineering research increasingly relies on computation and data, and a lot of geology-background groups might be looking for exactly this: someone who can help with data, build small tools, and write decent code. If an advisor happens to have that kind of need, I think I can be of use.</p>
+      <h3>On my geology foundation</h3>
+      <p>This is a gap I know I have to close, and I won't pretend otherwise. My plan is to work through the fundamentals systematically, and ask and look things up when I don't understand. The good news is I pick up new things quickly, and I can sit with a subject.</p>
+      <h3>Where I can lend a hand</h3>
+      <ul>
+        <li>If the group has work involving data, code, or tools, I can get going on it — without being taught entirely from scratch. The assessment system was a big project, and I took it from requirements all the way to deployment.</li>
+        <li>When I run into something I haven't done, I'll figure it out myself first — look it up, try it — rather than just waiting. This blog, theme and deployment included, is something I built that way.</li>
+        <li>Tedious or iterative work is fine with me too — two months of daily patching on business systems taught me to see things through.</li>
+      </ul>
+    </div>
   </div>
+</section>
 
-  <%# 英文版暂用空状态（英文文章尚未创建） %>
-  <p class="empty-hint">Nothing here yet — stay tuned.</p>
+<section class="story-section" id="skills" data-section="2" data-morph="1">
+  <div class="story-panel">
+    <div class="section-head"><h2 class="section-title">How I Can Help</h2></div>
+    <div class="story-content" style="margin-bottom:28px">
+      <p>My solid ground is Java backend — I've independently built a complete, deployed full-stack system. I can collaborate on frontend integration, and engineering habits (version control, docs, maintainability) were drilled into me during my internship.</p>
+    </div>
+    <div class="skills-wrap">
+      <div class="skill-group">
+        <h3 class="skill-group-title">Backend development (my main area)</h3>
+        <p class="skill-desc">I can build a complete backend service end-to-end: API design, database schema, business logic, access control. The assessment system was mine from requirements to deployment.</p>
+        <div class="skill-tags">
+          <span class="cat">Java</span>
+          <span class="cat">Spring Boot</span>
+          <span class="cat">MyBatis</span>
+          <span class="cat">MySQL</span>
+          <span class="cat">Spring Security</span>
+          <span class="cat">Redis</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3 class="skill-group-title">Frontend collaboration</h3>
+        <p class="skill-desc">I can read frontend code and integrate APIs — the handoff won't stall on my end. Building a frontend project from scratch isn't my strength, but modifying and debugging is fine.</p>
+        <div class="skill-tags">
+          <span class="cat">Vue3</span>
+          <span class="cat">API integration</span>
+          <span class="cat">RESTful API</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3 class="skill-group-title">Engineering habits</h3>
+        <p class="skill-desc">Managing code with Git, writing docs, keeping things tidy — these were daily practice in my internship, and they carry straight into a research group.</p>
+        <div class="skill-tags">
+          <span class="cat">Git</span>
+          <span class="cat">Documentation</span>
+          <span class="cat">Maintainability</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3 class="skill-group-title">Picking up new things fast</h3>
+        <p class="skill-desc">When I run into tools or fields I haven't touched, I can get a working version going relatively quickly, then deepen as I go. This blog — frontend through deployment — is how I figured it out.</p>
+        <div class="skill-tags">
+          <span class="cat">Fast learning</span>
+          <span class="cat">Learn by doing</span>
+          <span class="cat">Reading docs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story-section" id="project" data-section="3" data-morph="2">
+  <div class="story-panel">
+    <div class="section-head"><h2 class="section-title">Project</h2></div>
+    <article class="project-card">
+      <div class="project-head">
+        <div>
+          <h3 class="project-title">Campus Psychological Assessment System</h3>
+          <p class="project-meta">2025.06 – 2026.03 ｜ Joined during internship ｜ Java Backend</p>
+        </div>
+        <a class="project-link" href="https://gitee.com/lcy-spider-man/psy_cjxy.git" target="_blank" rel="noopener">
+          Gitee Source →
+        </a>
+      </div>
+      <p class="project-intro">A psychological assessment platform used by the school — students take tests and get results, counselors and the psychology center see the data. I was responsible for the backend.</p>
+
+      <h4 class="project-sub">What I actually did</h4>
+      <ul class="project-list">
+        <li>Starting from understanding the requirements, I broke "how questionnaires are sent out, how answers are stored, how results are computed" into small, writable pieces — then implemented, integrated, and revised them one by one;</li>
+        <li>There was a tricky part — unifying the scoring rules across different scales. I spent time mapping out the logic, aligned with colleagues, and turned it into an extensible rule so adding a new scale doesn't mean starting over;</li>
+        <li>As the data grew, queries slowed down. I investigated the cause and added indexes, bringing response times back to a normal level.</li>
+      </ul>
+
+      <h4 class="project-sub">What this experience taught me</h4>
+      <ul class="project-list">
+        <li>Inside a real system with real ongoing users — how to take on a requirement, collaborate, and locate problems when they arise;</li>
+        <li>Finishing the code isn't the end — it has to be readable, maintainable, and extendable later. That matters just as much for research.</li>
+      </ul>
+
+      <p class="project-note">Tech stack: Spring Boot, MyBatis, MySQL, Redis, Vue3. Full source on Gitee — feel free to look.</p>
+    </article>
+  </div>
+</section>
+
+<section class="story-section" id="timeline" data-section="4" data-morph="2">
+  <div class="story-panel">
+    <div class="section-head"><h2 class="section-title">Experience</h2></div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <div class="timeline-period">From 2026.09</div>
+          <h3 class="timeline-title">Heilongjiang University of Science &amp; Technology ｜ Geological Engineering (Master's)</h3>
+          <p class="timeline-desc">Incoming student. Research direction to be worked out with my advisor. If it happens to touch computation or data, that's where I'm most at home — but it follows the advisor's projects, and I'm willing to adapt.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <div class="timeline-period">2026</div>
+          <h3 class="timeline-title">Zunyi · Zhonglian Jinggong ｜ Web Development</h3>
+          <p class="timeline-desc">Maintained internal business systems (CRM, internal management tools) — day-to-day web development and fixes. Short stint, but it gave me a real feel for maintaining enterprise systems.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-body">
+          <div class="timeline-period">2025.06 – 2026.03</div>
+          <h3 class="timeline-title">Chongqing Youzhexing ｜ Java Backend (Internship)</h3>
+          <p class="timeline-desc">My main experience — I owned the backend of the psychological assessment system, from requirements to deployment. Details in the project section above.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story-section" id="research" data-section="5" data-morph="3">
+  <div class="story-panel">
+    <div class="section-head"><h2 class="section-title">Research Outlook</h2></div>
+    <% if (researchPage) { %><div class="story-content"><%- researchPage.content %></div><% } %>
+  </div>
 </section>

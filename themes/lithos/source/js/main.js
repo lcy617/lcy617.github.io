@@ -40,4 +40,18 @@
       a.rel = 'noopener noreferrer';
     }
   });
+
+  // ---------- 首页导航锚点：平滑滚动到对应章节 ----------
+  document.querySelectorAll('a[href*="#"]').forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      const hash = (a.getAttribute("href") || "").split("#")[1];
+      if (!hash) return;
+      const target = document.getElementById(hash);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (history.replaceState) history.replaceState(null, "", "#" + hash);
+      }
+    });
+  });
 })();

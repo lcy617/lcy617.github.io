@@ -47,4 +47,20 @@
       lang: '<%= page.lang || "zh" %>'
     };
   </script>
+
+  <%# 3D 晶体粒子：仅在首页加载 Three.js import map（CDN，带版本号，避开 /js/* 的 immutable 缓存） %>
+  <%
+    let _isHome = (typeof is_home === 'function' && is_home()) || page.layout === 'index' || page.layout === 'index-en';
+    let _crystalOn = theme.crystal && theme.crystal.enabled !== false;
+  %>
+  <% if (_isHome && _crystalOn) { %>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+    </script>
+  <% } %>
 </head>
